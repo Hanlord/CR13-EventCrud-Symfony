@@ -33,7 +33,7 @@ class TodoController extends AbstractController
 
 // taking the data from the inputs with the getData() function and assign it to the $todo variable
         $todo = $form->getData();
-        $todo->setCreateDate($now);  // this field is not included in the form so we set the today date
+        // $todo->setCreateDate($now);  // this field is not included in the form so we set the today date
         $em = $doctrine->getManager();
         $em->persist($todo);
         $em->flush();
@@ -60,7 +60,7 @@ class TodoController extends AbstractController
     if ($form->isSubmitted() && $form->isValid()) {
         $now = new \DateTime('now');
         $todo = $form->getData();
-        $todo->setCreateDate($now);
+        // $todo->setCreateDate($now);
         $em = $doctrine->getManager();
         $em->persist($todo);
         $em->flush();

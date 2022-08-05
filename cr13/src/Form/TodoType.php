@@ -52,7 +52,7 @@ class TodoType extends AbstractType
               'attr' => ['style' => 'margin-bottom:15px']
           ])
           ->add('save', SubmitType::class, [
-              'label' => 'Create Event',
+              'label' => 'Submit',
               'attr' => ['class' => 'btn btn-primary', 'style' => 'margin-bottom:15px']
           ]);
   }
