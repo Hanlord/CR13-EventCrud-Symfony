@@ -1,11 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 	{% include "components/navbar.html.twig"%}
-	{% for message in app.flashes('notice') %}
-		<div class="alert alert-success">
-			{{ message }}
-		</div>
-	{% endfor %}
 	<div class="row rows-col-lg-4 rows-col-md-2 rows-col-sm-1 text-center align-items-center">
 		<div class="container hero" style="background-image:url('{{ asset('pictures/hero.jpg') }}')" width="100%">
 			<br>
