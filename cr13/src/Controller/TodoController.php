@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\FileUploader;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Entity\Todo;
 use App\Form\TodoType;
 
@@ -22,47 +24,44 @@ class TodoController extends AbstractController
   }
 
   #[Route('/create', name: 'todo_create')]
-  public function create(Request $request, ManagerRegistry $doctrine): Response
+  public function create(Request $request, ManagerRegistry $doctrine, FileUploader $fileUploader): Response
   {
     $todo = new Todo();
     $form = $this->createForm(TodoType::class, $todo);
-
     $form->handleRequest($request);
-
-    /* Here we have an if statement, if we click submit and if  the form is valid we will take the values from the form and we will save them in the new variables */
     if ($form->isSubmitted() && $form->isValid()) {
-      $now = new \DateTime('now');
-
-      // taking the data from the inputs with the getData() function and assign it to the $todo variable
       $todo = $form->getData();
-      // $todo->setCreateDate($now);  // this field is not included in the form so we set the today date
+      $pic = $form->get('picture')->getData();
+      if ($pic){
+        $pictureFileName = $fileUploader->upload($pic);
+        $todo->setPicture($pictureFileName);
+      }
       $em = $doctrine->getManager();
       $em->persist($todo);
       $em->flush();
-
       $this->addFlash(
         'notice',
-        'Todo Added'
+        'Event Added'
       );
-
       return $this->redirectToRoute('todo');
     }
-
-    /* now to make the form we will add this line form->createView() and now you can see the form in create.html.twig file  */
     return $this->render('todo/create.html.twig', ['form' => $form->createView()]);
   }
 
   #[Route('/edit/{id}', name: 'todo_edit')]
-  public function edit(Request $request, ManagerRegistry $doctrine, $id): Response
+  public function edit(Request $request, ManagerRegistry $doctrine, $id,FileUploader $fileUploader): Response
   {
     $todo = $doctrine->getRepository(Todo::class)->find($id);
     $form = $this->createForm(TodoType::class, $todo);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-      $now = new \DateTime('now');
       $todo = $form->getData();
-      // $todo->setCreateDate($now);
+      $pic = $form->get('picture')->getData();
+      if ($pic){
+        $pictureFileName = $fileUploader->upload($pic);
+        $todo->setPicture($pictureFileName);
+      }
       $em = $doctrine->getManager();
       $em->persist($todo);
       $em->flush();

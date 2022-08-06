@@ -27,7 +27,8 @@
 			{% for todo in todos %}
 				<div class="col-4 g-4">
 					<div class="card" style="width: 18rem;">
-						<img src="{{todo.picture}}" class="card-img-top" height="300rem">
+						<img src="{{ asset('pictures/' ~ todo.picture)}}" class="card-img-top" height="300rem">
+						{# <img src="{{todo.picture}}" class="card-img-top" height="300rem"> #}
 						<div class="card-body">
 							<h5 class="card-title">{{todo.name}}</h5>
 							<p class="card-text">{{todo.description}}</p>
