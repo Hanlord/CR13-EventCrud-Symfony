@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\TodoRepository;
+use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TodoRepository::class)]
-class Todo
+#[ORM\Entity(repositoryClass: EventRepository::class)]
+class Event
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

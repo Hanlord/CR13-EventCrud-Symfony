@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Todo;
+use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Todo>
+ * @extends ServiceEntityRepository<Event>
  *
- * @method Todo|null find($id, $lockMode = null, $lockVersion = null)
- * @method Todo|null findOneBy(array $criteria, array $orderBy = null)
- * @method Todo[]    findAll()
- * @method Todo[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Event|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Event|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Event[]    findAll()
+ * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TodoRepository extends ServiceEntityRepository
+class EventRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Todo::class);
+        parent::__construct($registry, Event::class);
     }
 
-    public function add(Todo $entity, bool $flush = false): void
+    public function add(Event $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TodoRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Todo $entity, bool $flush = false): void
+    public function remove(Event $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TodoRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Todo[] Returns an array of Todo objects
+//     * @return Event[] Returns an array of Event objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TodoRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Todo
+//    public function findOneBySomeField($value): ?Event
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')

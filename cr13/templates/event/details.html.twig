@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	{% include "components/navbar.html.twig"%}
+	<div class="container">
+		<br>
+		<div class="row rows-col-lg-4 rows-col-md-2 rows-col-sm-1 animate__animated animate__fadeInLeft d-flex justify-content-center">
+        <div class="card bg-dark text-white" style="width: 25rem;">
+								<img src="{{ asset('pictures/' ~ event.picture)}}" class="card-img-top" height="300rem">
+								{# <img src="{{event.picture}}" class="card-img-top" alt="..."> #}
+								<div class="card-body">
+									<h5 class="card-title text-center">{{event.name}}</h5>
+									<p class="card-text">{{event.description}}</p>
+									<p class="card-text">capacity: {{event.capacity}} people</p>
+									<p class="card-text">email: {{event.contact}}</p>
+									<p class="card-text">phone: {{event.phone}}</p>
+									<p class="card-text">location: {{event.location}}</p>
+									<p class="card-text">Url: {{event.url}}</p>
+									<p class="card-text">Type: {{event.type}}</p>
+									<p class="card-text">When: {{event.Date|date('F j, Y, g:i a')}}</p>
+									<a href="/edit/{{event.id}}" class="btn btn-warning">Edit</a>
+									<a href="/delete/{{event.id}}" class="btn btn-danger">Delete</a>
+								</div>
+							</div>
+                        </div>
+                        </div>
+			<a class="btn btn-info" href="/">Back</a>
+{% include "components/footer.html.twig"%}
+		{% endblock %}

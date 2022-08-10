@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Todo;
+use App\Entity\Event;
 use DateTime;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
-class TodoType extends AbstractType
+class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -81,7 +81,7 @@ class TodoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Todo::class,
+            'data_class' => Event::class,
         ]);
     }
 }
